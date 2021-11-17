@@ -17,6 +17,9 @@ public class Category {
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private Set<Book> books;
 
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    private Set<SubCategory> subCategories;
+
     public Category() {
     }
 
@@ -47,6 +50,14 @@ public class Category {
 
     public void setBooks(Set<Book> books) {
         this.books = books;
+    }
+
+    public Set<SubCategory> getSubCategories() {
+        return subCategories;
+    }
+
+    public void setSubCategories(Set<SubCategory> subCategories) {
+        this.subCategories = subCategories;
     }
 
     @Override

@@ -1,11 +1,10 @@
 package com.example.code.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.util.Set;
 
 @Entity
 @Table(name = "book")
@@ -36,18 +35,26 @@ public class Book {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "author_id", nullable = true)
+    @JoinColumn(name = "author_id")
     private Author author;
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "category_id", nullable = true)
+    @JoinColumn(name = "category_id")
     private Category category;
 
     @JsonIgnore
     @OneToOne
-    @JoinColumn(name = "statistics_id", nullable = true)
+    @JoinColumn(name = "statistics_id")
     private Statistics statistics;
+
+    @JsonIgnore
+    @ManyToMany
+    private Set<SubCategory> subcategory;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "books")
+    private Set<Cart> cart;
 
     public Book() {
     }
@@ -131,4 +138,21 @@ public class Book {
     public void setStatistics(Statistics statistics) {
         this.statistics = statistics;
     }
+
+    public Set<SubCategory> getSubcategory() {
+        return subcategory;
+    }
+
+    public void setSubcategory(Set<SubCategory> subcategory) {
+        this.subcategory = subcategory;
+    }
+
+    public Set<Cart> getCart() {
+        return cart;
+    }
+
+    public void setCart(Set<Cart> cart) {
+        this.cart = cart;
+    }
+
 }
