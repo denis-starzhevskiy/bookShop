@@ -1,0 +1,34 @@
+spring:
+  datasource:
+#    driverClassName: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/test?useUnicode=true&serverTimezone=UTC&useSSL=true&verifyServerCertificate=false
+#    username: root
+#    password: Gangster+
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5775/shopBook
+    username: root
+    password: root
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+
+cross-origin: http://127.0.0.1:5501
+
+cloud:
+  aws:
+    credentials:
+      access-key: AKIAU3MZFGUFI34NQP4E
+      secret-key: 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
+    region:
+      static: eu-central-1
+    stack:
+      auto: false
+
+application:
+  bucket:
+    name: imagebucketdata
+
+
+
+
+
