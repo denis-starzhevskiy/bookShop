@@ -4,9 +4,11 @@ import com.example.code.controller.BookController;
 import com.example.code.dto.AuthorDto;
 import com.example.code.dto.BookDto;
 import com.example.code.dto.CategoryDto;
+import com.example.code.dto.SubCategoryDto;
 import com.example.code.model.Author;
 import com.example.code.model.Book;
 import com.example.code.model.Category;
+import com.example.code.model.SubCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +35,7 @@ public class DtoService {
         bookDto.setAuthor(book.getAuthor());
         bookDto.setCategory(book.getCategory());
         bookDto.setStatistics(book.getStatistics());
+        bookDto.setSubCategorySet(book.getSubcategory());
         bookDto.add(linkTo(methodOn(BookController.class).getBookById(book.getId())).withSelfRel());
         return bookDto;
     }
@@ -55,5 +58,15 @@ public class DtoService {
                 .map(this::wrapBookToBookDto)
                 .collect(Collectors.toSet()));
         return authorDto;
+    }
+
+    public SubCategoryDto wrapSubCategory(SubCategory subCategory){
+        SubCategoryDto subCategoryDto = new SubCategoryDto();
+        subCategoryDto.setSubCategoryId(subCategory.getSubCategoryId());
+        subCategoryDto.setSubCategoryName(subCategory.getSubCategoryName());
+        subCategoryDto.setCategory(subCategory.getCategory());
+        subCategoryDto.setSubSlag(subCategory.getSubSlag());
+        subCategoryDto.setBooks(subCategory.getBooks());
+        return subCategoryDto;
     }
 }

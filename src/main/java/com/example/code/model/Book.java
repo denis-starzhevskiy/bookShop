@@ -49,7 +49,7 @@ public class Book {
     private Statistics statistics;
 
     @JsonIgnore
-    @ManyToMany
+    @ManyToMany(mappedBy = "books")
     private Set<SubCategory> subcategory;
 
     @JsonIgnore

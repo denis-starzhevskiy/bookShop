@@ -3,8 +3,11 @@ package com.example.code.dto;
 import com.example.code.model.Author;
 import com.example.code.model.Category;
 import com.example.code.model.Statistics;
+import com.example.code.model.SubCategory;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.stereotype.Component;
+
+import java.util.Set;
 
 @Component
 public class BookDto extends RepresentationModel<BookDto> {
@@ -19,6 +22,7 @@ public class BookDto extends RepresentationModel<BookDto> {
     private Author author;
     private Category category;
     private Statistics statistics;
+    private Set<SubCategory> subCategorySet;
 
     public Long getId() {
         return id;
@@ -98,5 +102,13 @@ public class BookDto extends RepresentationModel<BookDto> {
 
     public void setStatistics(Statistics statistics) {
         this.statistics = statistics;
+    }
+
+    public Set<SubCategory> getSubCategorySet() {
+        return subCategorySet;
+    }
+
+    public void setSubCategorySet(Set<SubCategory> subCategorySet) {
+        this.subCategorySet = subCategorySet;
     }
 }

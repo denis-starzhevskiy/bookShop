@@ -1,37 +1,28 @@
-package com.example.code.model;
+package com.example.code.dto;
 
+import com.example.code.model.Book;
+import com.example.code.model.Category;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity
-@Table(name = "sub_category")
-public class SubCategory {
+@Component
+public class SubCategoryDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int subCategoryId;
 
-    @Column(name = "sub_category_name")
     private String subCategoryName;
 
-    @Column(name = "sub_slug")
     private String subSlag;
 
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "category_id")
     private Category category;
 
-    @JsonIgnore
-    @ManyToMany
-    @JoinTable(
-            name = "book_sub_category",
-            joinColumns = @JoinColumn(name = "book_sub_category_id"),
-            inverseJoinColumns = @JoinColumn(name = "sub_category_book_id")
-    )
     private Set<Book> books;
+
+    public SubCategoryDto() {
+    }
 
     public int getSubCategoryId() {
         return subCategoryId;
