@@ -1,8 +1,8 @@
 package com.example.code.model;
 
 public enum Permission {
-    DEVELOPERS_READ("developers:read"),
-    DEVELOPERS_WRITE("evelopers:writed");
+    USERS_READ("user:read"),
+    USERS_WRITE("user:write");
 
     private final String permission;
 

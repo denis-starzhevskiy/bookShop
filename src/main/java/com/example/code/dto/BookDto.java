@@ -4,12 +4,14 @@ import com.example.code.model.Author;
 import com.example.code.model.Category;
 import com.example.code.model.Statistics;
 import com.example.code.model.SubCategory;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;
 
 @Component
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class BookDto extends RepresentationModel<BookDto> {
 
     private Long id;

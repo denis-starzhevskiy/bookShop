@@ -1,11 +1,13 @@
 package com.example.code.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;
 
 @Component
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CategoryDto extends RepresentationModel<CategoryDto> {
 
     private int categoryId;

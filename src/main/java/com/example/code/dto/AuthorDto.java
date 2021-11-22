@@ -1,12 +1,15 @@
 package com.example.code.dto;
 
 import com.example.code.model.Book;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Component
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class AuthorDto {
 
     private int author_id;

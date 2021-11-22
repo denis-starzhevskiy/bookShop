@@ -1,10 +1,12 @@
 package com.example.code.controller;
 
 import com.example.code.model.Book;
+import com.example.code.model.Permission;
 import com.example.code.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,6 +17,7 @@ public class BookController {
     private BookService service;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('user:read')")
     public ResponseEntity<Object> getAllBooks(){
         return service.getAllBooks();
     }

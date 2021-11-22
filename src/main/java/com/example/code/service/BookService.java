@@ -6,6 +6,7 @@ import com.example.code.model.Book;
 import com.example.code.model.Statistics;
 import com.example.code.repository.BookRepository;
 import com.example.code.repository.StatisticsRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Slf4j
 public class BookService {
-
-    private Logger logger;
 
     @Autowired
     private BookRepository bookRepository;
@@ -32,7 +32,6 @@ public class BookService {
     private final DtoService serviceDto;
 
     public BookService(BookRepository bookRepository, DtoService serviceDto) {
-        logger = LoggerFactory.getLogger(BookController.class);
         this.serviceDto = serviceDto;
         this.bookRepository = bookRepository;
     }
@@ -44,10 +43,10 @@ public class BookService {
             for (Book book: bookRepository.findAll()) {
                 books.add(serviceDto.wrapBookToBookDto(book));
             }
-            return new ResponseEntity<Object>(books, HttpStatus.OK);
+            return new ResponseEntity<>(books, HttpStatus.OK);
         } catch(Exception ex) {
-            logger.error(ex.getMessage(), ex);
-            return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
+            log.error(ex.getMessage(), ex);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -56,13 +55,13 @@ public class BookService {
         try{
             BookDto book = serviceDto.wrapBookToBookDto(bookRepository.findById(id).get());
             if(book != null) {
-                return new ResponseEntity<Object>(book, HttpStatus.OK);
+                return new ResponseEntity<>(book, HttpStatus.OK);
             } else {
-                return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         } catch(Exception ex) {
-            logger.error(ex.getMessage(), ex);
-            return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
+            log.error(ex.getMessage(), ex);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -72,10 +71,10 @@ public class BookService {
             Statistics statistic = statisticsRepository.save(new Statistics((short) 0, 0));
             book.setId((long) statistic.getStatisticsId());
             Book savedBook = bookRepository.save(book);
-            return new ResponseEntity<Object>(savedBook, HttpStatus.OK);
+            return new ResponseEntity<>(savedBook, HttpStatus.OK);
         } catch(Exception ex) {
-            logger.error(ex.getMessage(), ex);
-            return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
+            log.error(ex.getMessage(), ex);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -84,10 +83,10 @@ public class BookService {
         try{
             book.setId(id);
             Book savedCustomer = bookRepository.save(book);
-            return new ResponseEntity<Object>(savedCustomer, HttpStatus.OK);
+            return new ResponseEntity<>(savedCustomer, HttpStatus.OK);
         } catch(Exception ex) {
-            logger.error(ex.getMessage(), ex);
-            return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
+            log.error(ex.getMessage(), ex);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -95,10 +94,10 @@ public class BookService {
     public ResponseEntity<HttpStatus> deleteBook(Long id) {
         try {
             bookRepository.deleteById(id);
-            return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch(Exception ex) {
-            logger.error(ex.getMessage(), ex);
-            return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
+            log.error(ex.getMessage(), ex);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 

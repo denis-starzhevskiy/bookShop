@@ -9,9 +9,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public enum Role {
-    user(Collections.unmodifiableSet(new HashSet<>(Collections.singletonList(Permission.DEVELOPERS_READ)))),
-    admin(Collections.unmodifiableSet(new HashSet<>(Arrays.asList(Permission.DEVELOPERS_READ, Permission.DEVELOPERS_WRITE))));
-
+    USER(Collections.unmodifiableSet(
+            new HashSet<>(Collections.singletonList(Permission.USERS_READ)))),
+    ADMIN(Collections.unmodifiableSet(
+            new HashSet<>(Arrays.asList(Permission.USERS_READ, Permission.USERS_WRITE))));
+//    USER(new HashSet<>(Collections.singletonList(Permission.DEVELOPERS_READ)),
+//    ADMIN(new HashSet<>(Arrays.asList(Permission.DEVELOPERS_READ, Permission.DEVELOPERS_WRITE));
 
     private final Set<Permission> permissions;
 
