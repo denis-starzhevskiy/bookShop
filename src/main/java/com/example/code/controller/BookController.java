@@ -17,7 +17,7 @@ public class BookController {
     private BookService service;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('user:read')")
+    //@PreAuthorize("hasAuthority('user:read')")
     public ResponseEntity<Object> getAllBooks(){
         return service.getAllBooks();
     }

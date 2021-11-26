@@ -72,4 +72,12 @@ public class SubCategory {
     public void setBooks(Set<Book> books) {
         this.books = books;
     }
+
+    @Override
+    public String toString() {
+        return "SubCategory{" +
+                "subCategoryId=" + subCategoryId +
+                ", subCategoryName='" + subCategoryName + '\'' +
+                ", subSlag='" + subSlag;
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.code.service;
 
+import com.amazonaws.services.kms.model.NotFoundException;
 import com.example.code.controller.BookController;
 import com.example.code.dto.BookDto;
 import com.example.code.model.Book;
@@ -31,6 +32,9 @@ public class BookService {
     @Autowired
     private final DtoService serviceDto;
 
+    @Autowired
+    StorageService storageService;
+
     public BookService(BookRepository bookRepository, DtoService serviceDto) {
         this.serviceDto = serviceDto;
         this.bookRepository = bookRepository;
@@ -53,12 +57,10 @@ public class BookService {
     @Transactional
     public ResponseEntity<Object> getBookById(Long id) {
         try{
-            BookDto book = serviceDto.wrapBookToBookDto(bookRepository.findById(id).get());
-            if(book != null) {
-                return new ResponseEntity<>(book, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
+            Book book = bookRepository.findById(id).orElseThrow(() -> new NullPointerException("Nothing to send"));
+            System.out.println(book.getSubcategory());
+            book.setPhotoData(storageService.downloadFile(book.getPhotoName()));
+            return new ResponseEntity<>(book, HttpStatus.OK);
         } catch(Exception ex) {
             log.error(ex.getMessage(), ex);
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

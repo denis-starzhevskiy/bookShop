@@ -1,5 +1,6 @@
 package com.example.code.dto;
 
+import com.example.code.model.SubCategory;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,8 @@ public class CategoryDto extends RepresentationModel<CategoryDto> {
     private String categoryName;
 
     private Set<BookDto> books;
+
+    private Set<SubCategory> subCategorySet;
 
     public int getCategoryId() {
         return categoryId;
@@ -38,5 +41,13 @@ public class CategoryDto extends RepresentationModel<CategoryDto> {
 
     public void setBooks(Set<BookDto> books) {
         this.books = books;
+    }
+
+    public Set<SubCategory> getSubCategoryDtoSet() {
+        return subCategorySet;
+    }
+
+    public void setSubCategorySet(Set<SubCategory> subCategorySet) {
+        this.subCategorySet = subCategorySet;
     }
 }

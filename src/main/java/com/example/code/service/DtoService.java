@@ -27,15 +27,15 @@ public class DtoService {
         BookDto bookDto = new BookDto();
         bookDto.setId(book.getId());
         bookDto.setBookName(book.getBookName());
-        bookDto.setDescription(book.getDescription());
-        bookDto.setPageAmount(book.getPageAmount());
+//        bookDto.setDescription(book.getDescription());
+//        bookDto.setPageAmount(book.getPageAmount());
         bookDto.setPrice(book.getPrice());
-        bookDto.setISBN(book.getISBN());
+//        bookDto.setISBN(book.getISBN());
         bookDto.setPhotoData(storageService.downloadFile(book.getPhotoName()));
         bookDto.setAuthor(book.getAuthor());
-        bookDto.setCategory(book.getCategory());
-        bookDto.setStatistics(book.getStatistics());
-        bookDto.setSubCategorySet(book.getSubcategory());
+//        bookDto.setCategory(book.getCategory());
+//        bookDto.setStatistics(book.getStatistics());
+//        bookDto.setSubCategorySet(book.getSubcategory());
         bookDto.add(linkTo(methodOn(BookController.class).getBookById(book.getId())).withSelfRel());
         return bookDto;
     }
@@ -47,6 +47,7 @@ public class DtoService {
         categoryDto.setBooks(category.getBooks().stream()
                 .map(this::wrapBookToBookDto)
                 .collect(Collectors.toSet()));
+        categoryDto.setSubCategorySet(category.getSubCategories());
         return categoryDto;
     }
 
