@@ -70,4 +70,17 @@ public class Book {
     public String getPhotoName() {
         return photoName;
     }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", bookName='" + bookName + '\'' +
+                ", description='" + description + '\'' +
+                ", pageAmount=" + pageAmount +
+                ", price=" + price +
+                ", ISBN=" + ISBN +
+                ", language=" + language +
+                '}';
+    }
 }

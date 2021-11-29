@@ -29,10 +29,7 @@ public class SubCategoryService {
     @Transactional
     public ResponseEntity<Object> getAllSubCategories(){
         try{
-            List<SubCategoryDto> subCategories = new ArrayList<>();
-            for(SubCategory subCategory: subCategoryRepository.findAll()){
-                subCategories.add(dtoService.wrapSubCategory(subCategory));
-            }
+            List<SubCategory> subCategories = subCategoryRepository.findAll();
             return new ResponseEntity<>(subCategories, HttpStatus.OK);
         }catch (Exception ex){
             logger.error(ex.getMessage());
@@ -40,5 +37,15 @@ public class SubCategoryService {
         }
     }
 
-
+    @Transactional
+    public ResponseEntity<Object> getSubCategory(String subCategoryName) {
+        try{
+            SubCategory subCategory = subCategoryRepository.findSubCategoryBySubCategoryName(subCategoryName);
+            SubCategoryDto subCategoryDto = dtoService.wrapSubCategory(subCategory);
+            return new ResponseEntity<>(subCategoryDto, HttpStatus.OK);
+        }catch (Exception ex){
+            logger.error(ex.getMessage());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 }

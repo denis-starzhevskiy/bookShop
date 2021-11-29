@@ -29,15 +29,25 @@ public class AuthorService {
     public ResponseEntity<Object> getAllAuthors(){
         try {
             List<AuthorDto> authors = new ArrayList<>();
-
             for (Author author: authorRepository.findAll()) {
                 authors.add(dtoService.wrapAuthor(author));
             }
-            return new ResponseEntity<Object>(authors, HttpStatus.OK);
+            return new ResponseEntity<>(authors, HttpStatus.OK);
         } catch(Exception ex) {
             logger.error(ex.getMessage(), ex);
-            return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
+    @Transactional
+    public ResponseEntity<Object> getAuthor(String authorName) {
+        try{
+            Author author = authorRepository.findAuthorByAuthorName(authorName);
+            AuthorDto authorDto = dtoService.wrapAuthor(author);
+            return new ResponseEntity<>(authorDto, HttpStatus.OK);
+        }catch (Exception e){
+            logger.error(e.getMessage(), e);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 }

@@ -64,8 +64,6 @@ public class Category {
     public String toString() {
         return "Category{" +
                 "categoryId=" + categoryId +
-                ", categoryName='" + categoryName + '\'' +
-                ", books=" + books +
-                '}';
+                ", categoryName='" + categoryName;
     }
 }

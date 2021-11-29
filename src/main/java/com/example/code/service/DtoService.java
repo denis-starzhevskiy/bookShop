@@ -65,9 +65,11 @@ public class DtoService {
         SubCategoryDto subCategoryDto = new SubCategoryDto();
         subCategoryDto.setSubCategoryId(subCategory.getSubCategoryId());
         subCategoryDto.setSubCategoryName(subCategory.getSubCategoryName());
-        subCategoryDto.setCategory(subCategory.getCategory());
+//        subCategoryDto.setCategory(subCategory.getCategory());
         subCategoryDto.setSubSlag(subCategory.getSubSlag());
-        subCategoryDto.setBooks(subCategory.getBooks());
+        subCategoryDto.setBooks(subCategory.getBooks().stream()
+                .map(this::wrapBookToBookDto)
+                .collect(Collectors.toSet()));
         return subCategoryDto;
     }
 }

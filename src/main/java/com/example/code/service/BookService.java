@@ -58,7 +58,6 @@ public class BookService {
     public ResponseEntity<Object> getBookById(Long id) {
         try{
             Book book = bookRepository.findById(id).orElseThrow(() -> new NullPointerException("Nothing to send"));
-            System.out.println(book.getSubcategory());
             book.setPhotoData(storageService.downloadFile(book.getPhotoName()));
             return new ResponseEntity<>(book, HttpStatus.OK);
         } catch(Exception ex) {
@@ -66,6 +65,19 @@ public class BookService {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+
+//    @Transactional
+//    public ResponseEntity<Object> getBookBySubcategoryName(String subCategoryName) {
+//        try{
+//            Book book = bookRepository.findBySubCategory(subCategoryName).orElseThrow(() -> new NullPointerException("Nothing to send"));
+//            System.out.println(book.getSubcategory());
+//            book.setPhotoData(storageService.downloadFile(book.getPhotoName()));
+//            return new ResponseEntity<>(book, HttpStatus.OK);
+//        } catch(Exception ex) {
+//            log.error(ex.getMessage(), ex);
+//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//        }
+//    }
 
     @Transactional
     public ResponseEntity<Object> createBook(Book book) {

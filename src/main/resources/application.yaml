@@ -36,6 +36,10 @@ jwt:
   secretKey: bookShopSecurity
   expiration: 604800
 
+mail:
+  e-mail: denis.star02@gmail.com
+  password: Gangster2002
+
 cross-origin: http://127.0.0.1:5501
 
 

@@ -4,9 +4,12 @@ import com.example.code.model.Book;
 import com.example.code.model.Category;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Component
@@ -19,9 +22,7 @@ public class SubCategoryDto {
 
     private String subSlag;
 
-    private Category category;
-
-    private Set<Book> books;
+    private Set<BookDto> books;
 
     public SubCategoryDto() {
     }
@@ -50,19 +51,11 @@ public class SubCategoryDto {
         this.subSlag = subSlag;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public Set<Book> getBooks() {
+    public Set<BookDto> getBooks() {
         return books;
     }
 
-    public void setBooks(Set<Book> books) {
+    public void setBooks(Set<BookDto> books) {
         this.books = books;
     }
 }
