@@ -2,6 +2,8 @@ package com.example.code.service;
 
 import com.example.code.dto.AuthorDto;
 import com.example.code.model.Author;
+import com.example.code.model.SubCategory;
+import com.example.code.model.request.AuthorRequest;
 import com.example.code.repository.AuthorRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class AuthorService {
@@ -45,6 +48,19 @@ public class AuthorService {
             Author author = authorRepository.findAuthorByAuthorName(authorName);
             AuthorDto authorDto = dtoService.wrapAuthor(author);
             return new ResponseEntity<>(authorDto, HttpStatus.OK);
+        }catch (Exception e){
+            logger.error(e.getMessage(), e);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Transactional
+    public ResponseEntity<Object> updateAuthor(AuthorRequest authorRequest) {
+        try{
+            Author author = authorRepository.findById(authorRequest.getId()).orElseThrow(() -> new NoSuchElementException("Author doesn't exist"));
+            author.setAuthorName(authorRequest.getAuthorName());
+            Author authorSave = authorRepository.save(author);
+            return new ResponseEntity<>(authorSave, HttpStatus.OK);
         }catch (Exception e){
             logger.error(e.getMessage(), e);
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

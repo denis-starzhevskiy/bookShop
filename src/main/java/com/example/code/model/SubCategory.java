@@ -11,7 +11,8 @@ public class SubCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int subCategoryId;
+    @Column(name = "sub_category_id")
+    private int id;
 
     @Column(name = "sub_category_name")
     private String subCategoryName;
@@ -33,12 +34,12 @@ public class SubCategory {
     )
     private Set<Book> books;
 
-    public int getSubCategoryId() {
-        return subCategoryId;
+    public int getId() {
+        return id;
     }
 
-    public void setSubCategoryId(int subCategoryId) {
-        this.subCategoryId = subCategoryId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getSubCategoryName() {
@@ -76,7 +77,7 @@ public class SubCategory {
     @Override
     public String toString() {
         return "SubCategory{" +
-                "subCategoryId=" + subCategoryId +
+                "subCategoryId=" + id +
                 ", subCategoryName='" + subCategoryName + '\'' +
                 ", subSlag='" + subSlag;
     }

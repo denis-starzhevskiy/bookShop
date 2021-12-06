@@ -27,22 +27,23 @@ public class DtoService {
         BookDto bookDto = new BookDto();
         bookDto.setId(book.getId());
         bookDto.setBookName(book.getBookName());
-//        bookDto.setDescription(book.getDescription());
-//        bookDto.setPageAmount(book.getPageAmount());
+        bookDto.setDescription(book.getDescription());
+        bookDto.setPageAmount(book.getPageAmount());
         bookDto.setPrice(book.getPrice());
-//        bookDto.setISBN(book.getISBN());
+        bookDto.setISBN(book.getISBN());
         bookDto.setPhotoData(storageService.downloadFile(book.getPhotoName()));
         bookDto.setAuthor(book.getAuthor());
-//        bookDto.setCategory(book.getCategory());
-//        bookDto.setStatistics(book.getStatistics());
-//        bookDto.setSubCategorySet(book.getSubcategory());
+        bookDto.setLanguage(book.getLanguage());
+//        StringBuilder subCategoryId = new StringBuilder();
+//        book.getSubcategory().forEach(elem -> subCategoryId.append(elem.getId()));
+//        bookDto.setSubCategoryId(subCategoryId.toString());
         bookDto.add(linkTo(methodOn(BookController.class).getBookById(book.getId())).withSelfRel());
         return bookDto;
     }
 
     public CategoryDto wrapCategory(Category category){
         CategoryDto categoryDto = new CategoryDto();
-        categoryDto.setCategoryId(category.getCategoryId());
+        categoryDto.setId(category.getCategoryId());
         categoryDto.setCategoryName(category.getCategoryName());
         categoryDto.setBooks(category.getBooks().stream()
                 .map(this::wrapBookToBookDto)
@@ -53,7 +54,7 @@ public class DtoService {
 
     public AuthorDto wrapAuthor(Author author) {
         AuthorDto authorDto = new AuthorDto();
-        authorDto.setAuthor_id(author.getAuthor_id());
+        authorDto.setId(author.getId());
         authorDto.setAuthorName(author.getAuthorName());
         authorDto.setBooks(author.getBooks().stream()
                 .map(this::wrapBookToBookDto)
@@ -63,7 +64,7 @@ public class DtoService {
 
     public SubCategoryDto wrapSubCategory(SubCategory subCategory){
         SubCategoryDto subCategoryDto = new SubCategoryDto();
-        subCategoryDto.setSubCategoryId(subCategory.getSubCategoryId());
+        subCategoryDto.setId(subCategory.getId());
         subCategoryDto.setSubCategoryName(subCategory.getSubCategoryName());
 //        subCategoryDto.setCategory(subCategory.getCategory());
         subCategoryDto.setSubSlag(subCategory.getSubSlag());

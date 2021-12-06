@@ -9,7 +9,8 @@ public class Author {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int author_id;
+    @Column(name = "author_id")
+    private int id;
 
     @Column(name = "author_name")
     private String authorName;
@@ -17,12 +18,12 @@ public class Author {
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     private Set<Book> books;
 
-    public int getAuthor_id() {
-        return author_id;
+    public int getId() {
+        return id;
     }
 
-    public void setAuthor_id(int author_id) {
-        this.author_id = author_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Set<Book> getBooks() {

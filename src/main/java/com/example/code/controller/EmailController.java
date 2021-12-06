@@ -1,8 +1,8 @@
 package com.example.code.controller;
 
+import com.example.code.model.request.SupplierEmail;
 import com.example.code.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,5 +22,12 @@ public class EmailController {
     public ResponseEntity<Object> sendEmailLetter(@RequestBody String email){
         return emailService.sendEmail(email);
     }
+
+    @PostMapping(path = "/supply", consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<Object> sendEmailLetter(@RequestBody SupplierEmail supplierEmail){
+        return emailService.sendEmail(supplierEmail.getEmail(), supplierEmail.getOrder());
+    }
+
 
 }

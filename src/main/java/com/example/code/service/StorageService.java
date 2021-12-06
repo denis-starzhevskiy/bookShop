@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Objects;
 
 @Service
 public class StorageService {
@@ -35,12 +36,17 @@ public class StorageService {
         return "File uploaded : " + file.getOriginalFilename();
     }
 
+    public String uploadPhoto(File file){
+        String fileName = System.currentTimeMillis() + "_" + file.getName();
+        s3Client.putObject(new PutObjectRequest(bucketName, fileName, file));
+        return fileName;
+    }
+
     public byte[] downloadFile(String filename){
         S3ObjectInputStream inputStream;
         try (S3Object s3Object = s3Client.getObject(bucketName, filename)) {
             inputStream = s3Object.getObjectContent();
-            byte[] content = IOUtils.toByteArray(inputStream);
-            return content;
+            return IOUtils.toByteArray(inputStream);
         }catch (IOException e) {
             return null;
         }
@@ -52,7 +58,7 @@ public class StorageService {
     }
 
     private File multipartFileToFile(MultipartFile file){
-        File convertedFile = new File(file.getOriginalFilename());
+        File convertedFile = new File(Objects.requireNonNull(file.getOriginalFilename()));
         try(FileOutputStream fos = new FileOutputStream(convertedFile)) {
             fos.write(file.getBytes());
         }catch (IOException io){

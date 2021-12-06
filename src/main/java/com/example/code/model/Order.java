@@ -1,6 +1,7 @@
 package com.example.code.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -8,7 +9,8 @@ import java.sql.Timestamp;
 import java.util.Set;
 
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
+@Data
 public class Order {
 
     @Id
@@ -28,14 +30,11 @@ public class Order {
     @Column(name = "region")
     private String region;
 
-    @Column(name = "location")
-    private String location;
+    @Column(name = "city")
+    private String city;
 
-    @Column(name = "section")
-    private String section;
-
-    @Column(name = "address")
-    private String address;
+    @Column(name = "street")
+    private String street;
 
     @Column(name = "status")
     private String status;
@@ -43,10 +42,7 @@ public class Order {
     @Column(name = "buying_type")
     private String buying_type;
 
-    @Column(name = "paying_type")
-    private String paying_type;
-
-    @Column(name = "comment")
+    @Column(name = "description")
     private String comment;
 
     @CreatedDate

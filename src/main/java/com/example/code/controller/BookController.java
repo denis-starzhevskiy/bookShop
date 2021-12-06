@@ -2,6 +2,7 @@ package com.example.code.controller;
 
 import com.example.code.model.Book;
 import com.example.code.model.Permission;
+import com.example.code.model.request.BookRequest;
 import com.example.code.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +18,6 @@ public class BookController {
     private BookService service;
 
     @GetMapping
-    //@PreAuthorize("hasAuthority('user:read')")
     public ResponseEntity<Object> getAllBooks(){
         return service.getAllBooks();
     }
@@ -32,15 +32,14 @@ public class BookController {
         return service.createBook(book);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Object> updateBook(@PathVariable("id") Long id, @RequestBody Book book) {
-        return service.updateBook(id, book);
+    @PutMapping
+    public ResponseEntity<Object> updateBook(@RequestBody BookRequest bookRequest) {
+        return service.updateBook(bookRequest);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteBook(@PathVariable("id") Long id) {
         return service.deleteBook(id);
     }
-
 
 }

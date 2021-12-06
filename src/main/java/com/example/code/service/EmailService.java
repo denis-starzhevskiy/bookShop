@@ -36,4 +36,20 @@ public class EmailService {
 
     }
 
+    public ResponseEntity<Object> sendEmail(String targetEmail, String order) {
+        SimpleMailMessage message = new SimpleMailMessage();
+
+        message.setFrom(email);
+        message.setTo(targetEmail);
+        message.setSubject("THE BEST BOOK SHOP - > BOOKSHOP !! ");
+        message.setText("Потрібно відправити наступне замовлення : \n\n\n" + order);
+        try {
+            emailSender.send(message);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception ex){
+            log.error(ex.getMessage());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }

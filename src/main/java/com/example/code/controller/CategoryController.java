@@ -21,7 +21,7 @@ public class CategoryController {
     }
 
     @GetMapping("/{categoryName}")
-    public ResponseEntity<Object> getCatelogy(@PathVariable String categoryName){
+    public ResponseEntity<Object> getCategory(@PathVariable String categoryName){
         return categoryService.getCategory(categoryName);
     }
 }

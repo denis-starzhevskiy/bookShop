@@ -1,7 +1,6 @@
 package com.example.code.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -55,8 +54,8 @@ public class Book {
     @JoinColumn(name = "statistics_id")
     private Statistics statistics;
 
-//    @JsonIgnore
-    @ManyToMany(mappedBy = "books", fetch = FetchType.EAGER)
+    @JsonIgnore
+    @ManyToMany(mappedBy = "books", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<SubCategory> subcategory;
 
     @JsonIgnore
@@ -84,3 +83,4 @@ public class Book {
                 '}';
     }
 }
+

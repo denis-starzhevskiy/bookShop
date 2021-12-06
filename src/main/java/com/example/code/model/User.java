@@ -51,6 +51,7 @@ public class User {
     @ManyToMany
     private Set<Order> orders;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<CartBook> cartBooks;
 
